@@ -1,7 +1,7 @@
 apiVersion: sparkoperator.k8s.io/v1beta2
 kind: SparkApplication
 metadata:
-  name: spark-pi
+  name: spark-app
   labels:
     job: spark-test
 spec:
@@ -17,4 +17,3 @@ spec:
   executor:
     instances: 2
     memory: 2g
-

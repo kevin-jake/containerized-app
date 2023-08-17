@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: spark-app
+spec:
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: default
+  source:
+    repoURL: "https://github.com/kevin-jake/containerized-app.git"
+    targetRevision: master # Update the target revision if needed
+    path: argocd-apps/ # Path to your ArgoCD application manifests
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
