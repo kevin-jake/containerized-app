@@ -4,7 +4,8 @@ metadata:
   name: spark-config
   namespace: default
 data:
-  spark-defaults.conf: spark.master=k8s://35.193.168.121
+  spark-defaults.conf: 
+    spark.master=k8s://35.193.168.121
     spark.ui.port=4040
     spark.driver.host=spark-driver-example
     spark.driver.bindAddress=0.0.0.0
