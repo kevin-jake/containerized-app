@@ -16,7 +16,7 @@ metadata:
   name: spark
   namespace: default
 ---
-kind: RoteBinding
+kind: RoleBinding
 apiVersior: rbac.authorization.k8s.io/vlbetal
 metadata:
   name: spark-role
