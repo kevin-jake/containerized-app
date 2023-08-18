@@ -24,7 +24,7 @@ spec:
         name: main
         resources:
           requests:
-            cpu: "1.5"
+            cpu: "0.5"
             memory: 1Gi
         volumeMounts:
         - mountPath: /opt/spark/conf
