@@ -1,20 +1,39 @@
-# deployment.yaml
-apiVersion: apps/v1
+apiVersion: extensions/vlbetal
 kind: Deployment
 metadata:
-  name: spark-app
-  labels:
-    app: spark-app # Add a label here to match the selector
+  name: spark-master
+  namespace: default
 spec:
-  replicas: 1 # Update as needed
+  replicas: 1
   selector:
     matchLabels:
-      app: spark-app # Match the label in template.metadata.labels
-  template:
-    metadata:
-      labels:
-        app: spark-app # Match the label in selector.matchLabels
-    spec:
-      containers:
-        - name: spark-app-container
-          image: spark:latest
+      job: spark-job
+template:
+  metadata:
+    labels:
+      job: spark-job
+  spec:
+    containers:
+    - args:
+      — '/opt/spark/bin/spark-submit ../examples/src/main/python/pi.py 100000; tail -f /dev/null;'
+      command :
+      - /bin/sh
+      - -c
+      image: cnvrg/custom:spark-2.4.4
+      imagePuUPolicy: Always
+      name: main
+      resources:
+        requests:
+          cpu: "1.5"
+          memory: 1Gi
+      volumeMounts:
+      - mountPath: /opt/spark/conf
+        name: spark-config
+    imagePullSecrets:
+    - name: regcred
+    serviceAccount: spark
+    serviceAccountName: spark
+    volumes:
+    - configMap: 
+        name: spark-config
+      name: spark-config
